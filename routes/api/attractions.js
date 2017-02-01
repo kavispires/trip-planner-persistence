@@ -7,21 +7,21 @@ var Activity = require('../../models/activity');
 router.get('/hotels', function(req,res,next){
 	Hotel.findAll()
 	.then((hotels) => {
-		 return hotels;
+		 res.json(hotels);
 	});
 });
 
 router.get('/restaurants', function(req,res,next){
 	Restaurant.findAll()
 	.then((restaurants) => {
-		 return restaurants;
+		 res.json(restaurants);
 	});
 });
 
 router.get('/activities', function(req,res,next){
 	Activity.findAll()
 	.then((activities) => {
-		 return activities;
+		 res.json(activities);
 	});
 });
 
