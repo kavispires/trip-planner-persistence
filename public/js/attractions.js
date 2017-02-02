@@ -12,9 +12,9 @@ var attractionsModule = (function () {
   // application state
 
   var enhanced = {
-    hotels: hotels.map(attractionModule.create),
-    restaurants: restaurants.map(attractionModule.create),
-    activities: activities.map(attractionModule.create),
+    hotels: getHotels(),
+    restaurants: getRestaurants(),
+    activities: getActivities()
   };
 
   // private helper methods (only available inside the module)
@@ -45,6 +45,26 @@ var attractionsModule = (function () {
     }
 
   };
+
+  function getHotels(){
+    $.get('/api/hotels')
+    .then( data => data.map(attractionModule.create))
+    .catch(console.error.bind(console));
+  }
+
+  function getRestaurants(){
+    $.get('/api/restaurants')
+    .then( data => data.map(attractionModule.create))
+    .catch(console.error.bind(console));
+  }
+
+  function getActivities(){
+    $.get('/api/activities')
+    .then( data => data.map(attractionModule.create))
+    .catch(console.error.bind(console));
+  }
+
+
 
   return publicAPI;
 
