@@ -146,6 +146,15 @@ var dayModule = (function () {
 
   var publicAPI = {
 
+    /*// Get all days
+    getAllDays: function() {
+      $.get('/api/days')
+      .then(days =>{
+        console.log(days);
+      })
+    },*/
+    // Create on each day
+
     create: function (databaseDay) {
       return new Day(databaseDay);
     }

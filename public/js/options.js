@@ -10,10 +10,10 @@
  */
 
  var hotels,
-  restaurants,
-  activities;
+ restaurants,
+ activities;
 
-$(function(){
+ $(function(){
 
   // jQuery selects
   var $optionsPanel = $('#options-panel');
@@ -24,42 +24,42 @@ $(function(){
 
 
 
-$.ajax({
-  method: 'GET',
-  url: '/api/hotels'
-})
-.then(function (hotelsArr) {
-  console.log("Im getting hotels");
-  hotels = hotelsArr;
-  hotels.forEach(makeOption, $hotelSelect);
-})
-.catch(function (errorObj) {
-  console.error.bind(console);
-});
+  $.ajax({
+    method: 'GET',
+    url: '/api/hotels'
+  })
+  .then(function (hotelsArr) {
+    console.log("Im getting hotels");
+    hotels = hotelsArr;
+    hotels.forEach(makeOption, $hotelSelect);
+  })
+  .catch(function (errorObj) {
+    console.error.bind(console);
+  });
 
-$.ajax({
-  method: 'GET',
-  url: '/api/restaurants'
-})
-.then(function (restaurantArr) {
-  restaurants = restaurantArr;
-  restaurants.forEach(makeOption, $restaurantSelect);
-})
-.catch(function (errorObj) {
-  console.error.bind(console);
-});
+  $.ajax({
+    method: 'GET',
+    url: '/api/restaurants'
+  })
+  .then(function (restaurantArr) {
+    restaurants = restaurantArr;
+    restaurants.forEach(makeOption, $restaurantSelect);
+  })
+  .catch(function (errorObj) {
+    console.error.bind(console);
+  });
 
-$.ajax({
-  method: 'GET',
-  url: '/api/activities'
-})
-.then(function (activityArr) {
-  activities = activityArr;
-  activities.forEach(makeOption, $activitySelect);
-})
-.catch(function (errorObj) {
-  console.error.bind(console);
-});
+  $.ajax({
+    method: 'GET',
+    url: '/api/activities'
+  })
+  .then(function (activityArr) {
+    activities = activityArr;
+    activities.forEach(makeOption, $activitySelect);
+  })
+  .catch(function (errorObj) {
+    console.error.bind(console);
+  });
 
 
 
@@ -68,8 +68,8 @@ $.ajax({
 
   function makeOption (databaseAttraction) {
     var $option = $('<option></option>') // makes a new option tag
-      .text(databaseAttraction.name)
-      .val(databaseAttraction.id);
+    .text(databaseAttraction.name)
+    .val(databaseAttraction.id);
     this.append($option); // add the option to the specific select
   }
 
