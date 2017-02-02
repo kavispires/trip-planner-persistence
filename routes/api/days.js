@@ -5,6 +5,8 @@ var Restaurant = require('../../models/restaurant');
 var Activity = require('../../models/activity');
 var Day = require('../../models/day');
 
+module.exports = router;
+
 router.get('/days', function(req,res,next){
 	//get all of our days
 	Day.findAll()
@@ -24,6 +26,7 @@ router.delete('/days/:id', function(req,res,next){
 	Day.findById(req.params.id)
 	.then(day =>{
 		day.destroy();
+		console.log('Day was deleted.')
 	});
 });
 
@@ -39,7 +42,7 @@ router.post('/days/:id', function(req,res,next){
 	});
 });
 
-router.post('days/:id/hotel', function(req,res,next){
+router.post('/days/:id/hotel', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day =>{
@@ -48,7 +51,7 @@ router.post('days/:id/hotel', function(req,res,next){
 	});
 });
 
-router.delete('days/:id/hotel', function(req,res,next){
+router.delete('/days/:id/hotel', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day =>{
@@ -58,7 +61,7 @@ router.delete('days/:id/hotel', function(req,res,next){
 });
 
 //want to add line to days table
-router.post('days/:id/restaurants', function(req,res,next){
+router.post('/days/:id/restaurants', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day =>{
@@ -67,7 +70,7 @@ router.post('days/:id/restaurants', function(req,res,next){
 	});
 });
 
-router.delete('days/:id/restaurants', function(req,res,next){
+router.delete('/days/:id/restaurants', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day => {
@@ -76,7 +79,7 @@ router.delete('days/:id/restaurants', function(req,res,next){
 	});
 });
 
-router.post('days/:id/activities', function(req,res,next){
+router.post('/days/:id/activities', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day =>{
@@ -85,7 +88,7 @@ router.post('days/:id/activities', function(req,res,next){
 	});
 });
 
-router.delete('days/:id/activities', function(req,res,next){
+router.delete('/days/:id/activities', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day => {
@@ -93,3 +96,5 @@ router.delete('days/:id/activities', function(req,res,next){
 		// .delete row with req.body recieving a day number and reference to restaurant
 	});
 });
+
+

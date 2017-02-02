@@ -10,6 +10,6 @@ var Day = db.define('day', {
 
 Day.belongsTo(Hotel);
 Day.belongsToMany(Activity, {through: 'day_activity'});
-Day.beolngsToMany(Restaurant, {through: 'day_restaurant'});
+Day.belongsToMany(Restaurant, {through: 'day_restaurant'});
 
 module.exports = Day;

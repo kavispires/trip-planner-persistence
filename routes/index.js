@@ -3,9 +3,11 @@ var router = require('express').Router();
 var Hotel = require('../models/hotel');
 var Restaurant = require('../models/restaurant');
 var Activity = require('../models/activity');
-var apiRouter = require('./api/attractions');
+var attractionsRouter = require('./api/attractions');
+var daysRouter = require('./api/days')
 
-router.use('/api/', apiRouter);
+router.use('/api/', attractionsRouter);
+router.use('/api/', daysRouter);
 
 router.get('/', function(req, res, next) {
   Promise.all([
