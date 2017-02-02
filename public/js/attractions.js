@@ -23,6 +23,8 @@ var attractionsModule = (function () {
     return array.find(function (el) {
       return +el.id === +id;
     });
+
+
   }
 
   // globally accessible module methods (available to other modules)
@@ -37,6 +39,7 @@ var attractionsModule = (function () {
     },
 
     getEnhanced: function (databaseAttraction) {
+      console.log("Calling getEnhanced");
       var type = databaseAttraction.type;
       var id = databaseAttraction.id;
       var found = publicAPI.getByTypeAndId(type, id);
@@ -48,19 +51,19 @@ var attractionsModule = (function () {
 
   function getHotels(){
     $.get('/api/hotels')
-    .then( data => data.map(attractionModule.create))
+    .then( data => enhanced.hotels = data.map(attractionModule.create))
     .catch(console.error.bind(console));
   }
 
   function getRestaurants(){
     $.get('/api/restaurants')
-    .then( data => data.map(attractionModule.create))
+    .then( data => enhanced.restaurants = data.map(attractionModule.create))
     .catch(console.error.bind(console));
   }
 
   function getActivities(){
     $.get('/api/activities')
-    .then( data => data.map(attractionModule.create))
+    .then( data => enhanced.activities = data.map(attractionModule.create))
     .catch(console.error.bind(console));
   }
 

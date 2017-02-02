@@ -129,6 +129,7 @@ var dayModule = (function () {
     attraction.hide();
   };
 
+
   // globally accessible module methods
 
   var publicAPI = {
