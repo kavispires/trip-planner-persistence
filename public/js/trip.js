@@ -53,12 +53,24 @@ var tripModule = (function () {
       currentDay = newDay;
     }
     switchTo(newDay);
+    $.post('/api/days/'+ newDay.number) 
+    .then(function (data) {
+      console.log('POST response data', data)
+    })
+    .catch(console.error.bind(console));
   }
 
   function deleteCurrentDay () {
     // prevent deleting last day
     if (days.length < 2 || !currentDay) return;
     // remove from the collection
+    $.ajax({
+      type: "DELETE",
+      url: "/api/days/" + currentDay.number,
+    })
+    .then( data =>{
+      console.log("Deleting data: ", data);
+    })
     var index = days.indexOf(currentDay),
       previousDay = days.splice(index, 1)[0],
       newCurrent = days[index] || days[index - 1];

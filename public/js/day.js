@@ -96,6 +96,17 @@ var dayModule = (function () {
     // adding to the day object
     switch (attraction.type) {
       case 'hotel':
+        $.ajax({
+          url: 'api/days/' +this.number + '/hotel',
+          type: 'POST',
+          data: 'hotel_id=' + attraction.id,
+          success: function(data) {
+            alert('We saved a hotel')
+          },
+          fail: function(err){
+            console.log("i failed");
+          }
+        })
         if (this.hotel) this.hotel.hide();
         this.hotel = attraction;
         break;
@@ -118,6 +129,7 @@ var dayModule = (function () {
         this.hotel = null;
         break;
       case 'restaurant':
+
         utilsModule.remove(this.restaurants, attraction);
         break;
       case 'activity':

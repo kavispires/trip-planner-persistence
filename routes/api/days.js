@@ -7,7 +7,7 @@ var Day = require('../../models/day');
 
 module.exports = router;
 
-router.get('/days', function(req,res,next){
+router.get('/', function(req,res,next){
 	//get all of our days
 	Day.findAll()
 	.then((days)=>{
@@ -15,34 +15,34 @@ router.get('/days', function(req,res,next){
 	});
 });
 
-router.get('/days/:id', function(req,res,next){
+router.get('/:id', function(req,res,next){
 	Day.findById(req.params.id)
 	.then(day =>{
 		res.json(day);
 	});
 });
 
-router.delete('/days/:id', function(req,res,next){
-	Day.findById(req.params.id)
+router.delete('/:id', function(req,res,next){
+	Day.findOne({where: {number: req.params.id}})
 	.then(day =>{
 		day.destroy();
 		console.log('Day was deleted.')
 	});
 });
 
-router.post('/days/:id', function(req,res,next){
+router.post('/:id', function(req,res,next){
 	Day.findOrCreate({
 		where: {
-			id: req.params.id
+			number: +req.params.id
 		}
 	})
-	.then(day =>{
+	.then( ([day, found]) => {
 		console.log('Getting this:', day);
 		res.json(day);
 	});
 });
 
-router.post('/days/:id/hotel', function(req,res,next){
+router.post('/:id/hotel', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day =>{
@@ -51,7 +51,7 @@ router.post('/days/:id/hotel', function(req,res,next){
 	});
 });
 
-router.delete('/days/:id/hotel', function(req,res,next){
+router.delete('/:id/hotel', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day =>{
@@ -61,25 +61,29 @@ router.delete('/days/:id/hotel', function(req,res,next){
 });
 
 //want to add line to days table
-router.post('/days/:id/restaurants', function(req,res,next){
+router.post('/:id/restaurants', function(req,res,next){
 	console.log('BODY', req.body);
-	Day.findById(req.params.id)
+	Day.findOne({where: {
+		number: req.body.hotel_id
+		}
+	})
 	.then( day =>{
 		console.log(day);
 		// .create row with req.body recieving a day number and reference to restaurant
-	});
+	})
+	.catch(next);
 });
 
-router.delete('/days/:id/restaurants', function(req,res,next){
+router.delete('/:id/restaurants', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day => {
-		console.log(day);
+		// console.log(day);
 		// .delete row with req.body recieving a day number and reference to restaurant
 	});
 });
 
-router.post('/days/:id/activities', function(req,res,next){
+router.post('/:id/activities', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day =>{
@@ -88,7 +92,7 @@ router.post('/days/:id/activities', function(req,res,next){
 	});
 });
 
-router.delete('/days/:id/activities', function(req,res,next){
+router.delete('/:id/activities', function(req,res,next){
 	console.log('BODY', req.body);
 	Day.findById(req.params.id)
 	.then( day => {

@@ -7,7 +7,7 @@ var attractionsRouter = require('./api/attractions');
 var daysRouter = require('./api/days')
 
 router.use('/api/', attractionsRouter);
-router.use('/api/', daysRouter);
+router.use('/api/days', daysRouter);
 
 router.get('/', function(req, res, next) {
   Promise.all([
